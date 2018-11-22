@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.mapper.BookMapper">
+	<select id="getAll" resultType="com.neusoft.entity.Book">
+		select * from book order by id
+	</select>
+	
+	<delete id="delete">
+		delete from book where id = #{id}
+	</delete>
+	
+	<select id="getById" resultType="com.neusoft.entity.Book">
+		select * from book where id = #{id}
+	</select>
+	
+	<update id="update" >
+		update book set name = #{name},author = #{author},publish = #{publish},publishDate = #{publishDate},page = #{page},price = #{price},content=#{content} where id = #{id}
+	</update>
+	
+	<insert id='insert'>
+		insert into book values(null,#{name},#{publish},#{author},#{publishDate},#{page},#{price},#{content})
+	</insert>
+	
+	<select id="getpaged" resultType="com.neusoft.entity.Book">
+		select * from book order by id limit ${(pageNum-1)*pageSize},#{pageSize}
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(*) from book
+	</select>
+</mapper>

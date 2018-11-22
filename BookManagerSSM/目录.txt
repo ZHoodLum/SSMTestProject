@@ -1,0 +1,55 @@
+1、web.xml
+
+	1）前端控制器：转发请求给spring容器
+	2）监听器：启动spring容器，创建业务逻辑和数据访问组件
+	3）过滤器：对post请求进行编码的设置
+	
+2、springmvc.xml
+	
+	1）组件扫描
+	2）注解驱动
+	3）视图解析器
+	
+实现类
+mapper接口与实现
+service接口与实现
+控制器
+页面
+
+
+create table bookUser(
+	id int primary key auto_increment,
+    username varchar(30) not null,
+    password varchar(30) not null
+);
+
+insert into bookUser(username,password) values('tom','111');
+select * from bookUser;
+update bookUser set username = 'KING',password = '2222' where id = 2;
+
+
+truncate bookUser;
+
+
+create table book(
+	id int primary key auto_increment,
+    name varchar(100) not null,
+    author varchar(100) not null,
+    publish varchar(100) not null,
+    publishdate date not null,
+    page int,
+    price decimal (8,2), -- 总长度 8   小数点 2位
+    content varchar(500)
+);
+
+select * from book;
+
+insert into book values(null,'Java基础','张三','清华大学出版社','2028-9-9',3000,99,'Java是世界上最好的书！');
+insert into book values(null,'Java基础2','张三','清华大学出版社2','2028-9-9',3000,99,'Java是世界上最好的书！');
+insert into book values(null,'Java基础3','张三','清华大学出版社3','2028-9-9',3000,99,'Java是世界上最好的书！');
+insert into book values(null,'Java基础4','张三','清华大学出版社4','2028-9-9',3000,99,'Java是世界上最好的书！');
+insert into book values(null,'Java基础5','张三','清华大学出版社5','2028-9-9',3000,99,'Java是世界上最好的书！');
+insert into book values(null,'Java基础6','张三','清华大学出版社6','2028-9-9',3000,99,'Java是世界上最好的书！');
+
+--  pageSize  pageNum
+select * from book order by id limit (pageNum-1)*pageSize,pageSize;

@@ -1,0 +1,45 @@
+1、web.xml
+
+	1）前端控制器：转发请求给spring容器
+	2）监听器：启动spring容器，创建业务逻辑和数据访问组件
+	3）过滤器：对post请求进行编码的设置
+	
+2、springmvc.xml
+	
+	1）组件扫描
+	2）注解驱动
+	3）视图解析器
+	
+实现类
+mapper接口与实现
+service接口与实现
+控制器
+页面
+
+SQL语句P:
+
+create table s_card_info(
+s_id	int primary key auto_increment,
+s_name	varchar(100) not null,
+id_card	varchar(30) not null,
+s_card	varchar(30) not null,
+s_date	Date not null,
+s_type	Varchar(20) not null,
+constraint fy_s_type foreign key(s_type) references card_type(s_type)
+);
+
+insert into s_card_info values(null,'KING','1523244499652369745','111','2018-9-9',1);
+insert into s_card_info values(null,'KING','1523244499652369745','111','2018-9-9',2);
+insert into s_card_info values(null,'KING','1523244499652369745','111','2018-9-9',3);
+insert into s_card_info values(null,'TON','1523244499652369745','111','2018-9-9',1);
+select * from s_card_info;
+
+create table card_type(
+s_type	Varchar(20) primary key,
+card_name	varchar(100) not null
+);
+insert into card_type values('1','ACCP证书');
+insert into card_type values('2','ACCP-Oracle证书');
+insert into card_type values('3','启明星证书');
+insert into card_type values('4','设计大赛证书');
+select * from card_type;

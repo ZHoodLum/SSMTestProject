@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.mapper.EmpMapper">
+<!-- 多表查询   首先封装要关联的表，然后直接查询想要的表 -->
+	<resultMap type="com.neusoft.entity.Emp" id="basicmMap">
+	<!-- 如果属性名和数据库中的列明 不相同，必须要写这句话，如果相同可以不写 -->
+		<id property="empId" column="empid"/>
+		<result property="ename" column="ename"/>
+		<result property="egender" column="egender"/>
+		<!-- 关联实体 使用select属性进行查询 通过方法    Dept getById(int deptid)-->
+		<association property="dept" column="deptid" select="com.neusoft.mapper.DeptMapper.getById"></association>
+	</resultMap>
+	
+	<select id="getAll" resultMap="basicmMap">
+		select * from tblemp
+	</select>
+	
+	<select id="getById" resultMap="basicmMap">
+		select * from tblemp where empid = #{empId}
+	</select>
+	
+	<update id="update">
+		update tblemp set ename=#{ename},egender=#{egender},deptid=#{dept.deptId} where empid = #{empId}
+	</update>
+	
+	<insert id="insert">
+		insert into tblemp values(null,#{ename},#{egender},#{dept.deptId})
+	</insert>
+</mapper>
