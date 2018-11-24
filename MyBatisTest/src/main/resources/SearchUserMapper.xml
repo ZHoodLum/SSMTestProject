@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="SearchUserMapper">
+    <!--下面使用的select insert delete update等方法，是因为导入了DTD文件-->
+    <!--  id写接口中 方法名称   resulttype写 返回值类型    list<user>写user   -->
+    <!--查询全部-->
+    <!--<select id="searchAllUser" resultType="com.neusoft.entity.User"></select>-->
+    <select id="searchAllUser"  resultType="user">
+        select * from users
+    </select>
+    <!--
+        ${}   拼接字符串
+        #{}   占位符（防止sql注入）
+     -->
+    <!--查询单个-->
+    <select id="searchUserById"  parameterType="int" resultType="com.neusoft.entity.User">
+       select * from users where id=${value};
+    </select>
+
+    <!--插入数据-->
+    <insert id="insertUser" parameterType="user">
+        insert into users(id,username,password)  values(#{id},#{username},#{password})
+    </insert>
+
+    <!--查询多个参数-->
+    <select id="selectUserIdAndUserName" resultType="User">
+      select * from user where id = #{id} and username = #{username}
+    </select>
+
+    <insert id="addUser1">
+        insert into user values (#{id},#{username},#{password})
+        <selectKey keyProperty="id" resultType="int" order="BEFORE">
+            select max (id)+1 from user
+        </selectKey>
+    </insert>
+</mapper>

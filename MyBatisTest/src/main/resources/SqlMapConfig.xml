@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration> 
+	<properties resource="db.properties"></properties>
+<!-- 	<settings>
+		开启延迟加载
+		<setting name="lazyLoadingEnabled" value="true"/>
+		按需延迟加载
+		<setting name="aggressiveLazyLoading" value="false"/>
+		开启二级缓存
+		<setting name="cacheEnabled" value="true"/>
+	</settings> -->
+	<typeAliases>
+		<!-- 针对单个别名定义，type:实体类路径， alias:别名 -->
+		<!--<typeAlias type="com.neusoft.entity.User" alias="user"/> -->
+		<!-- 批量别名定义：指定包名，mybatis自动扫描包中的po类，自动定义别名（首字母大写或小写都可以）-->
+		<package name="com.neusoft.entity"/>
+	</typeAliases>
+	<environments default="development"> 
+		<environment id="development"> 
+			<transactionManager type="JDBC"/> 
+			<dataSource type="POOLED"> 
+				<property name="driver" value="${jdbc.driver}" />
+				<property name="url" value="${jdbc.url}" />
+				<property name="username" value="${jdbc.username}" />
+				<property name="password" value="${jdbc.password}" /> 
+			</dataSource> 
+		</environment> 
+	</environments> 
+
+	<mappers>
+		<mapper resource="SearchUserMapper.xml"/>
+		<mapper resource="InsertUserMapper.xml"/>
+		<!-- <mapper resource="mybatis/SysUserSqlMapper.xml"/> -->
+		<!-- 通过mapper接口加在单个映射文件：前提是使用mapper代理方法并且mapper.xml和接口在同一个目录下 -->
+		<!-- <mapper class="com.neusoft.mapper.SearchUserMapper"/> -->
+		<!-- 批量加在mapper，指定mapper接口包名，mybatis自动扫描包里面所有mapper接口进行加载 -->
+		<!-- 1.接口和xml文件在同一个包当中   如果不同包 使用<mapper resource="com/neusoft/mapper/SearchUserMapper.xml"/>-->
+		<!--<package name="mappers"/>-->
+	</mappers>
+
+
+
+</configuration>  
