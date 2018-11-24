@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.mapper.UserMapper">
+<!--
+<insert id="" parameterType="">
+
+</insert>
+-->
+<!--
+    在MyBatis中，通过parameterType完成输入映射(指将值映射到sql语句的占位符中，值的类型与dao层响应方法的参数类型一致)，
+                 通过resultType完成输出映射(从数据库中输出，通过dao层的方法查询到的数据输出到pojo对象中)。
+-->
+<select id="findUserById" parameterType="int" resultType="com.neusoft.domain.User">
+        select  * from user where id = #{id}
+    </select>
+</mapper>
