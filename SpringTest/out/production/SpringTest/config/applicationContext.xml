@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="formater" class="com.neusoft.controll.Upperformater">
+        <property name="title">
+            <value>你好啊！spring</value>
+        </property>
+    </bean>
+
+    <bean id="userdao1" class="com.neusoft.dao.UserDao">
+
+    </bean>
+    <!--如果我不想某个bean提前被加载，我可以这样设置 lazy-init="true"-->
+    <bean id="userdao" class="com.neusoft.dao.UserDao" lazy-init="true" init-method="init" destroy-method="destory">
+
+    </bean>
+
+    <!--通过构造器进行实例化-->
+    <bean id="user" class="com.neusoft.vo.Users">
+
+    </bean>
+
+    <!--通过静态工厂-->
+    <bean id="staticuserfactory" class="com.neusoft.factory.StaticUserFactory" factory-method="getInstance">
+
+    </bean>
+
+    <!--通过实例工厂-->
+    <bean id="user1" class="com.neusoft.vo.Users" factory-bean="createuserfactory"  factory-method="getInstance">
+
+    </bean>
+    <bean id="createuserfactory" class="com.neusoft.factory.UserFactory">
+
+    </bean>
+</beans>

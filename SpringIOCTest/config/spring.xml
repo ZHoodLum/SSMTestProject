@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+    <!--<bean id="juggle" class="com.moolit.myspring.Juggler">-->
+        <!--<constructor-arg name="bags" value="5"></constructor-arg>-->
+    <!--</bean>-->
+    <!--等价于这样一段话  Juggler duke = new Juggler()-->
+
+    <!--<bean id="songxiaobao" class="com.moolit.myspring.SongXiaoBao"></bean>-->
+
+    <!--<bean id="shashibiya" class="com.moolit.myspring.Sonnet29"></bean>-->
+
+
+    <!--<bean id="liudehua" class="com.moolit.myspring.PoeticJugger">-->
+        <!--<constructor-arg name="poem" ref="shashibiya"></constructor-arg>-->
+        <!-- 构造器参数   构造注入-->
+        <!--<constructor-arg name="poem" ref="songxiaofeng"></constructor-arg>-->
+    <!--</bean>-->
+
+    <!--<bean id="songxiaofeng" class="com.moolit.myspring.CHinaPoem"></bean>-->
+
+    <!--属性注入-->
+    <!--<bean id="zhaoliying" class="com.moolit.myspring.MoonlightPoet">-->
+        <!--<property name="age" value="25"></property>-->
+        <!--<property name="name" value="liming"></property>-->
+        <!--<property name="poem" ref="songxiaofeng"></property>-->
+        <!--<property name="list">-->
+            <!--<list>-->
+                <!--<value>KING</value>-->
+                <!--<value>LIBAI</value>-->
+            <!--</list>-->
+        <!--</property>-->
+        <!--<property name="map">-->
+            <!--<map>-->
+                <!--<entry key="aaa" value="666"/>-->
+                <!--<entry key="v" value="555"/>-->
+            <!--</map>-->
+        <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="users" class="com.moolit.myspring.Dog"-->
+          <!--p:id="2"-->
+          <!--p:name="张三"/>-->
+
+
+    <!--自定装配-->
+    <!--武器-->
+    <!--<bean id="dao" class="com.moolit.myspring.Falchion" primary="true" autowire-candidate="false"></bean>-->
+    <!--关羽-->
+    <!--正常装配-->
+    <!--<bean id="dao" class="com.moolit.myspring.Falchion"></bean>-->
+    <!--<bean id="guanyu" class="com.moolit.myspring.GuanYu" autowire="byName">-->
+    <!--<property name="weapon" ref="wuqi"></property>-->
+    <!--</bean>-->
+    <!--按名字装配-->
+    <!--<bean id="weapon" class="com.moolit.myspring.Falchion"></bean>-->
+    <!--<bean id="guanyu" class="com.moolit.myspring.GuanYu" autowire="byName"></bean>-->
+    <!--按类型装配-->
+    <!--<bean id="dao" class="com.moolit.myspring.Falchion"></bean>-->
+    <!--<bean id="fthj" class="com.moolit.myspring.HalBerd"></bean>-->
+    <!--<bean id="guanyu" class="com.moolit.myspring.GuanYu" autowire="byType"></bean>-->
+
+    <!--注解驱动   自动扫描  -->
+    <context:component-scan base-package="com.moolit.myspring">
+    </context:component-scan>
+</beans>
