@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.mapper.DeptMapper">
+
+    <sql id = "query_condition">
+        <where>
+            <if test="loc != null and loc !='' ">
+                loc = #{loc}
+            </if>
+            <if test="dname != null">
+                and dname like '%${dname}%'
+            </if>
+        </where>
+    </sql>
+
+    <select id="getDeptByID" parameterType="int" resultType="Dept">
+        select loc,deptno, dname from dept where deptno = #{deptno}
+    </select>
+
+    <select id="getAllDepts" resultType="Dept">
+        select * from dept
+        <include refid="query_condition"></include>
+    </select>
+    <!--where loc=#{loc} and dname like '%${dname}%';-->
+    <select id="getDeptsList" parameterType="Dept" resultType="Dept">
+        select * from dept
+        <include refid="query_condition"></include>
+    </select>
+
+    <select id="getDeptsListMap" parameterType="map" resultType="Dept">
+        select * from dept where loc = #{loc} and dname = #{deptname}
+
+    </select>
+
+    <select id="getDeptRecordCount" resultType="int">
+        select count(*) from dept
+    </select>
+
+    <delete id="deleteDeptByID" parameterType="int">
+        delete from dept where deptno = #{value}
+    </delete>
+
+    <insert id="addDept" parameterType="Dept">
+        <selectKey keyProperty="deptno" order="AFTER" resultType="int">
+              select Last_insert_id()
+        </selectKey>
+        insert into dept(dname,loc) values(#{dname},#{loc})
+    </insert>
+
+    <update id="updateDept" parameterType="Dept">
+        update dept
+        <set>
+            <if test="dname != null">
+                dname = #{dname},
+            </if>
+            <if test="loc != null">
+                loc = #{loc},
+            </if>
+        </set>
+
+        where deptno = #{deptno}
+    </update>
+
+    <select id="getEmpDeptInfo" resultType="map">
+        select emp.empno,emp.ename, emp.sal,
+        dept.dname,dept.loc from emp
+        join dept on emp.deptno = dept.deptno
+    </select>
+</mapper>
