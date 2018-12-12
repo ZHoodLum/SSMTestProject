@@ -1,0 +1,46 @@
+1、web.xml
+
+	1）前端控制器：转发请求给spring容器
+	2）监听器：启动spring容器，创建业务逻辑和数据访问组件
+	3）过滤器：对post请求进行编码的设置
+	
+2、springmvc.xml
+	
+	1）组件扫描
+	2）注解驱动
+	3）视图解析器
+	
+实现类
+mapper接口与实现
+service接口与实现
+控制器
+页面
+
+
+create table tbldept(
+deptid int primary key auto_increment,
+dname varchar(100) unique
+);
+
+insert into tbldept values(null,'人力资源部');
+insert into tbldept values(null,'事业部');
+insert into tbldept values(null,'商务部');
+insert into tbldept values(null,'医疗部');
+
+select * from tbldept where deptid = 1;
+
+
+create table tblemp(
+	empid int primary key auto_increment,
+    ename varchar(100) not null,
+    egender tinyint not null,
+    deptid int not null
+);
+
+insert into tblemp values(null,'TOM',1,1);
+insert into tblemp values(null,'KING',0,2);
+insert into tblemp values(null,'SFFL',1,3);
+insert into tblemp values(null,'JONE',0,1);
+insert into tblemp values(null,'CRIATE',1,2);
+select * from tblemp;
+

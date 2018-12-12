@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neusoft.mapper.DeptMapper">
+    <!--sql片段  供多条语句使用-->
+    <sql id="query_condition">
+        <where>
+            <if test="loc != null and loc != '' ">
+                loc = #{loc }
+            </if>
+            <if test="dname != null">
+                and dname like '%${dname}%'
+            </if>
+        </where>
+    </sql>
+    <!--根据ID进行查询-->
+    <select id="getDeptById" parameterType="int" resultType="Dept">
+        select * from dept where deptno = #{deptno}
+    </select>
+
+    <!--查询全部-->
+    <select id="getAllDept" resultType="com.neusoft.domain.Dept">
+        select * from dept
+    </select>
+
+    <!--根据ID进行删除-->
+    <delete id="deleteDeptById" parameterType="int">
+        delete from dept where deptno = #{deptno}
+    </delete>
+    <!--order 先执行insert into 语句 在执行selectKey-->
+    <insert id="addDept" parameterType="com.neusoft.mapper.DeptMapper">
+
+        <selectKey keyProperty="deptno" order="AFTER" resultType="int">
+            select last_insert_id()
+        </selectKey>
+        insert into dept(dname,loc) values(#{dname},#{loc})
+    </insert>
+
+    <!--根据ID修改数据-->
+    <update id="updateDept"  parameterType="com.neusoft.mapper.DeptMapper">
+        update dept set dname = #{dname},loc = #{loc} where deptno = #{deptno}
+    </update>
+
+    <!--按条件查询-->
+    <!--
+        <include refid="query_condition"></include>
+        使用include方法调用sql片段  根据id进行查找 一个sql片段可以供多条语句进行使用
+    -->
+    <!--按条件查询可以使用下面两种方法，常用的是第二种方法  直接将 % 这样的字符放在查询条件当中-->
+    <!--select * from dept where loc = #{loc} and dname like #{dname}-->
+    <!--select * from dept where loc = #{loc} and dname like '%${dname}%'-->
+    <select id="getDeptList" parameterType="Dept" resultType="Dept">
+        select * from dept
+        <include refid="query_condition"></include>
+     </select>
+
+    <!--查询数据条数-->
+    <select id="getDeptRecordCount" resultType="int">
+        select count(*) from dept
+    </select>
+
+    <!--//使用map集合-->
+    <select id="getDeptListMap" parameterType="map" resultType="Dept">
+        select * from dept where loc = #{loc} and dname = #{deptname}
+    </select>
+
+    <!--多表连接查询-->
+    <select id="getEmpDeptInfo" resultType="map">
+        select emp.ename,emp.sal,dept.dname from emp
+        join dept on dept.deptno = emp.deptno
+    </select>
+ </mapper>

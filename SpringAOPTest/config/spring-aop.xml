@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+     <!--  对象的话使用_____ref     值 使用____value            -->
+    <!--吉他类-->
+    <bean id="guitar" class="com.neusoft.aop.Guitar"/>
+    <!--唱歌类-->
+    <bean id="langlang" class="com.neusoft.aop.Instrumentalist">
+        <property name="song" value="义勇军进行曲"/>
+        <property name="instrument" ref="guitar"/>
+    </bean>
+
+    <!--观众类-->
+    <bean id="audience" class="com.neusoft.aop.Audience"></bean>
+
+    <!--<aop:config>-->
+        <!--&lt;!&ndash; 引用audience Bean &ndash;&gt;-->
+        <!--<aop:aspect ref="audience">-->
+            <!--&lt;!&ndash; 声明切入点 &ndash;&gt;-->
+            <!--<aop:pointcut id="performance" expression="execution(* com.neusoft.aop.Performer.perform(..))" />-->
+                <!--&lt;!&ndash; 表演之前 &ndash;&gt;-->
+                <!--<aop:before pointcut-ref="performance" method="takeSeats" />-->
+                <!--<aop:before pointcut-ref="performance" method="turnOffCellPhones" />-->
+                <!--&lt;!&ndash; 表演之后 &ndash;&gt;-->
+                <!--<aop:after-returning pointcut-ref="performance"  method="applaud" />-->
+                <!--&lt;!&ndash; 表演失败之后 &ndash;&gt;-->
+                <!--<aop:after-throwing pointcut-ref="performance" method="demandRefund" />-->
+        <!--</aop:aspect>-->
+    <!--</aop:config>-->
+
+    <bean id="aroundAudience" class="com.neusoft.aop.AroundAudience"></bean>
+
+    <aop:config>
+        <!-- 引用audience Bean -->
+        <aop:aspect ref="aroundAudience">
+            <!-- 声明切入点 -->
+            <aop:pointcut id="performance"
+                          expression="execution(* com.neusoft.aop.Performer.perform(..))" />
+            <aop:around method="watchPerformance" pointcut-ref="performance" />
+        </aop:aspect>
+    </aop:config>
+
+    <bean id="userManager" class="com.neusoft.aop.UserManagerImpl"></bean>
+
+</beans>

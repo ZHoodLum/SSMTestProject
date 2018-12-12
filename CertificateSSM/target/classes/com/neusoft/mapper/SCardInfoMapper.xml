@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.mapper.SCardInfoMapper">
+	<resultMap type="com.neusoft.entity.SCardInfo" id="basicMap">
+		<id property="sid" column="s_id"/>
+		<result property="sname" column="s_name"/>
+		<result property="idCard" column="id_Card"/>
+		<result property="scard" column="s_Card"/>
+		<result property="sdate" column="s_date"/>
+		
+		<association property="cardType" column="s_type" select="com.neusoft.mapper.CardTypeMapper.getById"></association>
+	</resultMap>
+	<select id="search1" resultMap="basicMap">
+		select * from s_card_info where s_name = #{sname} and id_card = #{idCard} order by s_id
+	</select>
+	
+	<select id="search2" resultMap="basicMap">
+		select * from s_card_info where s_name = #{sname} and id_card = #{idCard} and s_type = #{stype}
+		order by s_id
+	</select>
+	
+	<delete id="delete">
+		delete from s_card_info where s_id = #{sid}
+	</delete>
+</mapper>

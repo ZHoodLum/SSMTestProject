@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+  <context id="context1" targetRuntime="MyBatis3">
+  	<!-- 数据库连接串 -->
+    <jdbcConnection connectionURL="jdbc:mysql://localhost:3306/scott" driverClass="com.mysql.jdbc.Driver" password="root" userId="root" />
+    
+    <!-- 生成实体类 -->
+    <javaModelGenerator targetPackage="com.neu.entity" targetProject="elemanage" />
+    <!-- 生成Mapper文件 -->
+    <sqlMapGenerator targetPackage="com.neu.mapper" targetProject="elemanage" />
+    <!-- 生成java接口 -->
+    <javaClientGenerator targetPackage="com.neu.mapper" targetProject="elemanage" type="XMLMAPPER" />
+    
+    <!-- <table schema="root" tableName="ele_cust">
+      
+    </table>
+    <table schema="root" tableName="bank_cust">
+      
+    </table> -->
+    
+    <table schema="root" tableName="tbldept">
+      
+    </table>
+    <table schema="root" tableName="tblemp">
+      <columnOverride column="deptid" property="dept" javaType="com.neu.entity.Tbldept"></columnOverride>
+    </table>
+  </context>
+</generatorConfiguration>

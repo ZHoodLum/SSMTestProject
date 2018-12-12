@@ -1,0 +1,52 @@
+1、web.xml
+
+	1）前端控制器：转发请求给spring容器
+	2）监听器：启动spring容器，创建业务逻辑和数据访问组件
+	3）过滤器：对post请求进行编码的设置
+	
+2、springmvc.xml
+	
+	1）组件扫描
+	2）注解驱动
+	3）视图解析器
+	
+实现类
+mapper接口与实现
+service接口与实现
+控制器
+页面
+
+SQL语句P:
+
+
+create table Ele_cust(
+card_id	varchar(20) primary key,
+uname	varchar(100),
+addr	varchar(30),
+own_money varchar(100)
+);
+insert into ele_cust values(1002-003,'ss','辽宁省望花区滨河路东段一号','999');
+insert into ele_cust values(111,'aa','吉林省和平区海冰大厦','99');
+insert into ele_cust values(222,'aa','吉林省和平区海冰大厦','0');
+insert into ele_cust values(333,'aa','吉林省和平区海冰大厦','456789789');
+
+insert into ele_cust values(444,'aa','吉林省和平区海冰大厦','44');
+
+
+select * from ele_cust;
+select * from ele_cust where card_id = 2;
+
+truncate ele_cust;
+
+
+create table bank_cust(
+card_id	 varchar(20) primary key,
+blanace	 varchar(100)
+);
+insert into bank_cust values(123,100);
+insert into bank_cust values(456,456789);
+insert into bank_cust values(789,5);
+
+select * from bank_cust;
+
+truncate bank_cust;

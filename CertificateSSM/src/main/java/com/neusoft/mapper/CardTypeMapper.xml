@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.mapper.CardTypeMapper">
+	<select id="getAll" resultType="com.neusoft.entity.CardType">
+		select s_type stype,card_name cardname from card_type order by s_type
+	</select>
+	
+	<select id="getById" resultType="com.neusoft.entity.CardType">
+		select s_type stype,card_name cardname from card_type where s_type = #{stype}
+	</select>
+</mapper>
